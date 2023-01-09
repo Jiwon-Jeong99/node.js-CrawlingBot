@@ -1,33 +1,15 @@
-const puppeteer = require('puppeteer');
+const puppeteer = require("puppeteer");
 
 (async () => {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
+  const browser = await puppeteer.launch({
+      headless: false //브라우저를 잠깐 열어줌
+      // defaultViewport: 
+  }).then(async browser => {
+    const page = await browser.newPage();
+    await page.goto("http://127.0.0.1:5500/index.html", {waitUntil: "networkidle2"});
 
-  await page.goto('https://developers.google.com/web/');
-
-  // Type into search box.
-  await page.type('.devsite-search-field', 'Headless Chrome');
-
-  // Wait for suggest overlay to appear and click "show all results".
-  const allResultsSelector = '.devsite-suggest-all-results';
-  await page.waitForSelector(allResultsSelector);
-  await page.click(allResultsSelector);
-
-  // Wait for the results page to load and display the results.
-  const resultsSelector = '.gsc-results .gs-title';
-  await page.waitForSelector(resultsSelector);
-
-  // Extract the results from the page.
-  const links = await page.evaluate(resultsSelector => {
-    return [...document.querySelectorAll(resultsSelector)].map(anchor => {
-      const title = anchor.textContent.split('|')[0].trim();
-      return `${title} - ${anchor.href}`;
-    });
-  }, resultsSelector);
-
-  // Print all the files.
-  console.log(links.join('\n'));
-
-  await browser.close();
+    page.waitForNavigation(), //해당페이지 탐색이 완료되면 클릭 이벤트 실행
+    page.click('a.btn-btn');
+    page.screenshot({path: "it.png"});
+  });
 })();
