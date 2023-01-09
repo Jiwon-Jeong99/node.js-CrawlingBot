@@ -1,0 +1,24 @@
+{
+  "name": "node.js-crawlingbot",
+  "version": "19.4.1",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "node": "^19.3.0",
+    "puppeteer": "^19.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jiwon-Jeong99/node.js-CrawlingBot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jiwon-Jeong99/node.js-CrawlingBot/issues"
+  },
+  "homepage": "https://github.com/Jiwon-Jeong99/node.js-CrawlingBot#readme"
+}
